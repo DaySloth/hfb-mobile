@@ -1,6 +1,6 @@
 import React from "react";
 
-export default customerContext = React.createContext({
+const CustomerContext = React.createContext({
   salesperson: undefined,
   customer1: undefined,
   customer2: undefined,
@@ -12,3 +12,5 @@ export default customerContext = React.createContext({
   phone: undefined,
   email: undefined,
 });
+
+export default CustomerContext;
