@@ -44,7 +44,7 @@ export default function HomeScreen({ navigation }) {
                 Alert.alert("Form Incomplete", `Field: Sales Person`);
                 break;
             } else {
-                Alert.alert("hi");
+                navigation.navigate("Details");
                 break;
             }
         }
