@@ -8,7 +8,6 @@ import {
     Keyboard,
 } from "react-native";
 import { Button, Input, Image, Header } from "react-native-elements";
-import Logo from "../../assets/mobile-logo-horz-transparent.png";
 import CustomerContext from "../context/customerContext";
 
 export default function HomeScreen({ navigation }) {
@@ -35,16 +34,12 @@ export default function HomeScreen({ navigation }) {
                 backgroundColor="black"
                 statusBarProps={{ barStyle: "light-content" }}
             />
-            <Image
-                source={Logo}
-                style={{ width: 500, height: 300, marginTop: 100 }}
-                resizeMode="contain"
-            />
+            <Text>Details</Text>
 
             <Button
-                title="New Order"
+                title="Continue"
                 onPress={() => {
-                    navigation.navigate("Customer Info");
+                    //navigation.navigate("Customer Info");
                 }}
             />
         </View>
