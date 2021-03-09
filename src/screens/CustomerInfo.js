@@ -202,6 +202,7 @@ export default function HomeScreen({ navigation }) {
                         onPress={() => {
                             checkCustomerInfo();
                         }}
+                        style={{ marginBottom: 100, height: 100 }}
                     />
                 </ScrollView>
             </KeyboardAvoidingView>
@@ -212,6 +213,5 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginBottom: 100,
     },
 });
