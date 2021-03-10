@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 import AppNavigator from "./src/navigation/Navigator";
 import CustomerContext from "./src/context/customerContext";
+import UserContext from "./src/context/userContext";
 
 export default function App() {
     const [salesPerson, setSalesPerson] = useState("");
@@ -17,12 +18,20 @@ export default function App() {
         phone: undefined,
         email: undefined,
     });
+    const [user, setUser] = useState({
+        isLoggedIn: false,
+        first_name: undefined,
+        last_name: undefined,
+        email: undefined,
+    });
 
     return (
         <CustomerContext.Provider
             value={{ salesPerson, setSalesPerson, customer, setCustomer }}
         >
-            <AppNavigator />
+            <UserContext.Provider value={{ user, setUser }}>
+                <AppNavigator />
+            </UserContext.Provider>
         </CustomerContext.Provider>
     );
 }
