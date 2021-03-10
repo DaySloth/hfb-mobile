@@ -10,6 +10,7 @@ import {
 import { Button, Input, Image, Header } from "react-native-elements";
 import CustomerContext from "../context/customerContext";
 
+
 export default function HomeScreen({ navigation }) {
     const { salesPerson, setSalesPerson } = useContext(CustomerContext);
     const [error, setError] = useState("");
