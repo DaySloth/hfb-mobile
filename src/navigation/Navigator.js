@@ -4,19 +4,30 @@ import Home from "../screens/Home";
 import CustomerInfo from "../screens/CustomerInfo";
 import Details from "../screens/Details";
 import Login from "../screens/Login";
-import * as React from "react";
+import React, { useContext } from "react";
+import UserContext from "../context/userContext";
 
 const Drawer = createDrawerNavigator();
 
 export default function Navigator() {
+    const { user } = useContext(UserContext);
+
     return (
         <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Home">
-                <Drawer.Screen name="Login" component={Login} />
-                <Drawer.Screen name="Home" component={Home} />
-                <Drawer.Screen name="Customer Info" component={CustomerInfo} />
-                <Drawer.Screen name="Details" component={Details} />
-            </Drawer.Navigator>
+            {user.isLoggedIn ? (
+                <Drawer.Navigator initialRouteName="Home">
+                    <Drawer.Screen name="Home" component={Home} />
+                    <Drawer.Screen
+                        name="Customer Info"
+                        component={CustomerInfo}
+                    />
+                    <Drawer.Screen name="Details" component={Details} />
+                </Drawer.Navigator>
+            ) : (
+                <Drawer.Navigator initialRouteName="Login">
+                    <Drawer.Screen name="Login" component={Login} />
+                </Drawer.Navigator>
+            )}
         </NavigationContainer>
     );
 }
