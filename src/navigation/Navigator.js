@@ -1,4 +1,9 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+    createDrawerNavigator,
+    DrawerItem,
+    DrawerContentScrollView,
+    DrawerItemList,
+} from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "../screens/Home";
 import CustomerInfo from "../screens/CustomerInfo";
@@ -6,16 +11,36 @@ import Details from "../screens/Details";
 import Login from "../screens/Login";
 import React, { useContext } from "react";
 import UserContext from "../context/userContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
 
-export default function Navigator() {
-    const { user } = useContext(UserContext);
+export default function Navigator({ navigation }) {
+    const { user, setUser } = useContext(UserContext);
 
     return (
         <NavigationContainer>
             {user.isLoggedIn ? (
-                <Drawer.Navigator initialRouteName="Home">
+                <Drawer.Navigator
+                    initialRouteName="Home"
+                    drawerContent={(props) => {
+                        return (
+                            <DrawerContentScrollView {...props}>
+                                <DrawerItemList {...props} />
+                                <DrawerItem
+                                    label="Logout"
+                                    onPress={async () => {
+                                        await AsyncStorage.removeItem(
+                                            "hfbUserData"
+                                        );
+                                        setUser({ isLoggedIn: false });
+                                        navigation.closeDrawer();
+                                    }}
+                                />
+                            </DrawerContentScrollView>
+                        );
+                    }}
+                >
                     <Drawer.Screen name="Home" component={Home} />
                     <Drawer.Screen
                         name="Customer Info"
