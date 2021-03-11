@@ -24,8 +24,8 @@ export default function LoginScreen({ navigation }) {
             if (user) {
                 if (user.tempPassword) {
                     if (password === user.password) {
-                        //let them reset password
-                        //console.log()
+                        Alert.alert("Please update your password");
+                        setIsTempPass(true);
                     } else {
                         setError("Invalid username or password");
                     }
@@ -40,6 +40,19 @@ export default function LoginScreen({ navigation }) {
         }
     }
 
+    async function updatePassword() {
+        setError("");
+        if (newPassword && confirmNewPassword) {
+            if (newPassword === confirmNewPassword) {
+                const hashedPass = Base64.encode(newPassword);
+            } else {
+                setTempError("Passwords must match");
+            }
+        } else {
+            setTempError("Please complete form");
+        }
+    }
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -47,69 +60,121 @@ export default function LoginScreen({ navigation }) {
     const [isTempPass, setIsTempPass] = useState(false);
 
     const [error, setError] = useState("");
+    const [tempError, setTempError] = useState("");
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <Image
-                    source={Logo}
-                    style={{ width: 500, height: 300, marginTop: 100 }}
-                    resizeMode="contain"
-                />
-                <KeyboardAvoidingView
-                    style={{
-                        flex: 1,
-                        width: "90%",
-                        alignItems: "stretch",
-                    }}
-                    behavior="padding"
-                >
-                    <Input
-                        label="Username"
-                        value={username}
-                        onChangeText={(text) => {
-                            setUsername(text);
+        <SafeAreaView style={styles.container}>
+            <KeyboardAvoidingView
+                style={{
+                    flex: 1,
+                    marginTop: 30,
+                    flexDirection: "column",
+                    justifyContent: "center",
+                }}
+                behavior="padding"
+            >
+                <ScrollView>
+                    <Image
+                        source={Logo}
+                        style={{
+                            width: "100%",
+                            height: 300,
+                            alignSelf: "center",
                         }}
-                        keyboardAppearance="default"
-                        clearButtonMode="while-editing"
-                        returnKeyType="done"
-                        errorMessage={error}
-                    />
-                    <Input
-                        label="Password"
-                        value={password}
-                        onChangeText={(text) => {
-                            setPassword(text);
-                        }}
-                        secureTextEntry={true}
-                        keyboardAppearance="default"
-                        clearButtonMode="while-editing"
-                        autoCompleteType="password"
-                        returnKeyType="done"
-                        errorMessage={error}
+                        resizeMode="contain"
                     />
 
-                    <Button
-                        title="Login"
-                        onPress={() => {
-                            loginUser();
-                        }}
-                        style={{
-                            width: 200,
-                            alignSelf: "center",
-                            marginTop: 20,
-                        }}
-                    />
-                </KeyboardAvoidingView>
-            </View>
-        </ScrollView>
+                    <View>
+                        <Input
+                            label="Username"
+                            value={username}
+                            onChangeText={(text) => {
+                                setUsername(text);
+                            }}
+                            keyboardAppearance="default"
+                            clearButtonMode="while-editing"
+                            returnKeyType="done"
+                            errorMessage={error}
+                            disabled={isTempPass ? true : false}
+                        />
+                        <Input
+                            label="Password"
+                            value={password}
+                            onChangeText={(text) => {
+                                setPassword(text);
+                            }}
+                            secureTextEntry={true}
+                            keyboardAppearance="default"
+                            clearButtonMode="while-editing"
+                            autoCompleteType="password"
+                            returnKeyType="done"
+                            errorMessage={error}
+                            disabled={isTempPass ? true : false}
+                        />
+
+                        {isTempPass ? (
+                            <>
+                                <Input
+                                    label="New Password"
+                                    value={newPassword}
+                                    onChangeText={(text) => {
+                                        setNewPassword(text);
+                                    }}
+                                    secureTextEntry={true}
+                                    keyboardAppearance="default"
+                                    clearButtonMode="while-editing"
+                                    autoCompleteType="password"
+                                    returnKeyType="done"
+                                    errorMessage={tempError}
+                                />
+                                <Input
+                                    label="Confirm New Password"
+                                    value={confirmNewPassword}
+                                    onChangeText={(text) => {
+                                        setConfirmNewPassword(text);
+                                    }}
+                                    secureTextEntry={true}
+                                    keyboardAppearance="default"
+                                    clearButtonMode="while-editing"
+                                    autoCompleteType="password"
+                                    returnKeyType="done"
+                                    errorMessage={tempError}
+                                />
+
+                                <Button
+                                    title="Update password"
+                                    onPress={() => {
+                                        updatePassword();
+                                    }}
+                                    style={{
+                                        width: 200,
+                                        alignSelf: "center",
+                                        marginTop: 20,
+                                    }}
+                                />
+                            </>
+                        ) : (
+                            <Button
+                                title="Login"
+                                onPress={() => {
+                                    loginUser();
+                                }}
+                                style={{
+                                    width: 200,
+                                    alignSelf: "center",
+                                    marginTop: 20,
+                                }}
+                            />
+                        )}
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "flex-start",
-        alignItems: "center",
     },
 });
