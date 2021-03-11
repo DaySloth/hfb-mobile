@@ -1,3 +1,4 @@
+import { func } from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
 import {
     SafeAreaView,
@@ -11,7 +12,7 @@ import { Button, Input, Image, Header } from "react-native-elements";
 import { db } from "../../config/firebase.config.js";
 
 export default function LoginScreen({ navigation }) {
-    useEffect(() => {
+    function loginUser() {
         db.ref("/users")
             .once("value")
             .then((snapshot) => {
@@ -19,7 +20,7 @@ export default function LoginScreen({ navigation }) {
                 const user = "allisterrampenthal";
                 console.log(value[user]);
             });
-    }, []);
+    }
 
     const [error, setError] = useState("");
 
