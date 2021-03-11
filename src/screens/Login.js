@@ -6,14 +6,22 @@ import {
     StyleSheet,
     Alert,
     KeyboardAvoidingView,
+    ScrollView,
 } from "react-native";
 import { Button, Input, Image, Header } from "react-native-elements";
 import { db } from "../../config/firebase.config.js";
 import Logo from "../../assets/mobile-logo-horz-transparent.png";
 import { Base64 } from "js-base64";
-import { ScrollView } from "react-native-gesture-handler";
+import UserContext from "../context/userContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen({ navigation }) {
+    const { user, setUser } = useContext(UserContext);
+
+    useEffect(() => {
+        navigation.closeDrawer();
+    }, []);
+
     async function loginUser() {
         setError("");
         if (username && password) {
@@ -30,7 +38,25 @@ export default function LoginScreen({ navigation }) {
                         setError("Invalid username or password");
                     }
                 } else {
-                    //compare passwords
+                    if (password === Base64.decode(user.password)) {
+                        await AsyncStorage.setItem(
+                            "hfbUserData",
+                            JSON.stringify({
+                                first_name: user.first_name,
+                                last_name: user.last_name,
+                                email: user.email,
+                                last_login: Date.now(),
+                            })
+                        );
+                        setUser({
+                            isLoggedIn: true,
+                            first_name: user.first_name,
+                            last_name: user.last_name,
+                            email: user.email,
+                        });
+                    } else {
+                        setError("Invalid username or password");
+                    }
                 }
             } else {
                 setError("Invalid username or password");
@@ -41,10 +67,36 @@ export default function LoginScreen({ navigation }) {
     }
 
     async function updatePassword() {
-        setError("");
+        setTempError("");
         if (newPassword && confirmNewPassword) {
             if (newPassword === confirmNewPassword) {
                 const hashedPass = Base64.encode(newPassword);
+                db.ref(`/users/${username.toLowerCase()}`)
+                    .update({
+                        password: hashedPass,
+                        tempPassword: false,
+                    })
+                    .then(async () => {
+                        let newUser = await db
+                            .ref(`/users/${username.toLowerCase()}`)
+                            .once("value");
+                        newUser = newUser.val();
+                        await AsyncStorage.setItem(
+                            "hfbUserData",
+                            JSON.stringify({
+                                first_name: newUser.first_name,
+                                last_name: newUser.last_name,
+                                email: newUser.email,
+                                last_login: Date.now(),
+                            })
+                        );
+                        setUser({
+                            isLoggedIn: true,
+                            first_name: newUser.first_name,
+                            last_name: newUser.last_name,
+                            email: newUser.email,
+                        });
+                    });
             } else {
                 setTempError("Passwords must match");
             }

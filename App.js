@@ -33,20 +33,24 @@ export default function App() {
         let localUser = await AsyncStorage.getItem("hfbUserData");
         if (localUser) {
             localUser = JSON.parse(localUser);
-            if (await LocalAuthentication.hasHardwareAsync()) {
-                if (await LocalAuthentication.isEnrolledAsync()) {
-                    if (
-                        await LocalAuthentication.authenticateAsync({
-                            promptMessage: `Verify this is ${localUser.name}`,
-                        })
-                    ) {
-                        setUser({ isLoggedIn: true, ...localUser });
+            const lastLogin = new Date(localUser.last_login).getTime();
+            const oneDay = new Date().getTime() + 1 * 24 * 60 * 60 * 1000;
+            if (oneDay > lastLogin) {
+                if (await LocalAuthentication.hasHardwareAsync()) {
+                    if (await LocalAuthentication.isEnrolledAsync()) {
+                        if (
+                            await LocalAuthentication.authenticateAsync({
+                                promptMessage: `Verify this is ${localUser.first_name}`,
+                            })
+                        ) {
+                            setUser({ isLoggedIn: true, ...localUser });
+                        }
+                    } else {
+                        //prompt for a login code
                     }
                 } else {
                     //prompt for a login code
                 }
-            } else {
-                //prompt for a login code
             }
         }
     }

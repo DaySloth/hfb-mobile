@@ -28,13 +28,12 @@ export default function Navigator({ navigation }) {
                             <DrawerContentScrollView {...props}>
                                 <DrawerItemList {...props} />
                                 <DrawerItem
-                                    label="Logout"
+                                    label={`Logout, ${user.first_name}`}
                                     onPress={async () => {
                                         await AsyncStorage.removeItem(
                                             "hfbUserData"
                                         );
                                         setUser({ isLoggedIn: false });
-                                        navigation.closeDrawer();
                                     }}
                                 />
                             </DrawerContentScrollView>
