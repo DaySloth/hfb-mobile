@@ -4,9 +4,9 @@
     "slug": "hfb-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/HomeForeverBaths-Logo--blue.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/HomeForeverBaths-Logo--blue.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
