@@ -1,11 +1,15 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { ScrollView } from "react-native";
 import AppNavigator from "./src/navigation/Navigator";
 import CustomerContext from "./src/context/customerContext";
 import UserContext from "./src/context/userContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as LocalAuthentication from "expo-local-authentication";
 
 export default function App() {
+    useEffect(() => {
+        checkLocalUser();
+    }, []);
+
     const [salesPerson, setSalesPerson] = useState("");
     const [customer, setCustomer] = useState({
         customer1: undefined,
@@ -24,6 +28,28 @@ export default function App() {
         last_name: undefined,
         email: undefined,
     });
+
+    async function checkLocalUser() {
+        let localUser = await AsyncStorage.getItem("hfbUserData");
+        if (localUser) {
+            localUser = JSON.parse(localUser);
+            if (await LocalAuthentication.hasHardwareAsync()) {
+                if (await LocalAuthentication.isEnrolledAsync()) {
+                    if (
+                        await LocalAuthentication.authenticateAsync({
+                            promptMessage: `Verify this is ${localUser.name}`,
+                        })
+                    ) {
+                        setUser({ isLoggedIn: true, ...localUser });
+                    }
+                } else {
+                    //prompt for a login code
+                }
+            } else {
+                //prompt for a login code
+            }
+        }
+    }
 
     return (
         <CustomerContext.Provider
