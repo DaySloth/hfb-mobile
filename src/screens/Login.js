@@ -1,47 +1,93 @@
-import { func } from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
 import {
-    SafeAreaView,
-    Text,
-    View,
-    StyleSheet,
-    Alert,
-    Keyboard,
+  SafeAreaView,
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  Keyboard,
 } from "react-native";
 import { Button, Input, Image, Header } from "react-native-elements";
 import { db } from "../../config/firebase.config.js";
+import Logo from "../../assets/mobile-logo-horz-transparent.png";
+import { Base64 } from "js-base64";
 
 export default function LoginScreen({ navigation }) {
-    function loginUser() {
-        db.ref("/users")
-            .once("value")
-            .then((snapshot) => {
-                const value = snapshot.val();
-                const user = "allisterrampenthal";
-                console.log(value[user]);
-            });
+  async function loginUser() {
+    setError("");
+    let user = await db.ref(`/users/${username.toLowerCase()}`).once("value");
+    user = user.val();
+    if (user) {
+      if (user.tempPassword) {
+        if (password === user.password) {
+          //let them reset password
+          //console.log()
+        } else {
+          setError("Invalid username or password");
+        }
+      } else {
+        //compare passwords
+      }
+    } else {
+      setError("Invalid username or password");
     }
+  }
 
-    const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [isTempPass, setIsTempPass] = useState(false);
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <Text>Details</Text>
+  const [error, setError] = useState("");
 
-            <Button
-                title="Continue"
-                onPress={() => {
-                    //navigation.navigate("Customer Info");
-                }}
-            />
-        </SafeAreaView>
-    );
+  return (
+    <SafeAreaView style={styles.container}>
+      <Image
+        source={Logo}
+        style={{ width: 500, height: 300, marginTop: 100 }}
+        resizeMode="contain"
+      />
+
+      <Input
+        label="Username"
+        value={username}
+        onChangeText={(text) => {
+          setUsername(text);
+        }}
+        keyboardAppearance="default"
+        clearButtonMode="while-editing"
+        returnKeyType="done"
+        errorMessage={error}
+      />
+      <Input
+        label="Password"
+        value={password}
+        onChangeText={(text) => {
+          setPassword(text);
+        }}
+        secureTextEntry={true}
+        keyboardAppearance="default"
+        clearButtonMode="while-editing"
+        autoCompleteType="password"
+        returnKeyType="done"
+        errorMessage={error}
+      />
+
+      <Button
+        title="Login"
+        onPress={() => {
+          loginUser();
+        }}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "flex-start",
-        alignItems: "center",
-    },
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
 });
