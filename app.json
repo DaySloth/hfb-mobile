@@ -2,9 +2,10 @@
   "expo": {
     "name": "hfb-mobile",
     "slug": "hfb-mobile",
+    "privacy" : "unlisted",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/HomeForeverBaths-Logo--blue.png",
+    "icon": "./assets/HFB-icon-60x60.png",
     "splash": {
       "image": "./assets/HomeForeverBaths-Logo--blue.png",
       "resizeMode": "contain",
@@ -17,7 +18,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.homeforeverbaths.hfbmobile",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "This app uses faceId to locally authenticate that the user can access the application."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -27,6 +32,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Mobile application for Home Forever Baths to help with contract creation and order accuracy for customers"
   }
 }
