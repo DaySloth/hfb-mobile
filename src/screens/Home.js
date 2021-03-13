@@ -65,7 +65,7 @@ export default function HomeScreen({ navigation }) {
                             phone: undefined,
                             email: undefined,
                         });
-                        navigation.navigate("Customer Info");
+                        navigation.navigate("Installation Info");
                     }}
                 />
             </ImageBackground>
