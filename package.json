@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
+    "@react-native-community/datetimepicker": "3.0.4",
     "@react-native-picker/picker": "1.9.2",
     "@react-navigation/drawer": "^5.12.4",
     "@react-navigation/native": "^5.9.3",
@@ -28,6 +29,7 @@
     "react-native-dotenv": "^2.5.3",
     "react-native-elements": "^3.2.0",
     "react-native-gesture-handler": "~1.8.0",
+    "react-native-paper": "^4.7.2",
     "react-native-picker-select": "^8.0.4",
     "react-native-reanimated": "~1.13.0",
     "react-native-screens": "~2.15.2",
