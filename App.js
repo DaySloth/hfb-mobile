@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AppNavigator from "./src/navigation/Navigator";
 import CustomerContext from "./src/context/customerContext";
 import UserContext from "./src/context/userContext";
+import InstallContext from "./src/context/installContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as LocalAuthentication from "expo-local-authentication";
 
@@ -28,6 +29,19 @@ export default function App() {
         last_name: undefined,
         email: undefined,
     });
+
+    const [projectType, setProjectType] = useState("");
+    const [installStory, setInstallStory] = useState("");
+    const [typeOfHome, setTypeOfHome] = useState("");
+    const [workspaceLocation, setWorkspaceLocation] = useState("");
+    const [bathroomLocation, setBathroomLocation] = useState("");
+    const [onlyBathroom, setOnlyBathroom] = useState("");
+    const [waterShutOff, setWaterShutOff] = useState("");
+    const [hasBasement, setHasBasement] = useState(false);
+    const [basementCondition, setBasementCondition] = useState("");
+    const [isPermitRequired, setIsPermitRequired] = useState("");
+    const [hoa, setHoa] = useState(undefined);
+    const [hoaDetails, setHoaDetails] = useState("");
 
     async function checkLocalUser() {
         let localUser = await AsyncStorage.getItem("hfbUserData");
@@ -59,7 +73,36 @@ export default function App() {
             value={{ salesPerson, setSalesPerson, customer, setCustomer }}
         >
             <UserContext.Provider value={{ user, setUser }}>
-                <AppNavigator />
+                <InstallContext.Provider
+                    value={{
+                        projectType,
+                        setProjectType,
+                        installStory,
+                        setInstallStory,
+                        typeOfHome,
+                        setTypeOfHome,
+                        workspaceLocation,
+                        setWorkspaceLocation,
+                        bathroomLocation,
+                        setBathroomLocation,
+                        onlyBathroom,
+                        setOnlyBathroom,
+                        waterShutOff,
+                        setWaterShutOff,
+                        hasBasement,
+                        setHasBasement,
+                        basementCondition,
+                        setBasementCondition,
+                        isPermitRequired,
+                        setIsPermitRequired,
+                        hoa,
+                        setHoa,
+                        hoaDetails,
+                        setHoaDetails,
+                    }}
+                >
+                    <AppNavigator />
+                </InstallContext.Provider>
             </UserContext.Provider>
         </CustomerContext.Provider>
     );
