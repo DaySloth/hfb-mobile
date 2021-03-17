@@ -7,7 +7,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "../screens/Home";
 import InstallationInfo from "../screens/InstallationInfo";
-import Details from "../screens/Details";
+import Measurements from "../screens/Measurements";
 import Login from "../screens/Login";
 import React, { useContext } from "react";
 import UserContext from "../context/userContext";
@@ -46,7 +46,10 @@ export default function Navigator({ navigation }) {
                         name="Installation Info"
                         component={InstallationInfo}
                     />
-                    <Drawer.Screen name="Details" component={Details} />
+                    <Drawer.Screen
+                        name="Measurements"
+                        component={Measurements}
+                    />
                 </Drawer.Navigator>
             ) : (
                 <Drawer.Navigator initialRouteName="Login">
