@@ -7,9 +7,9 @@ import {
     Alert,
     Keyboard,
 } from "react-native";
-import { Button, Input, Image, Header } from "react-native-elements";
+import { Button, Input, Image } from "react-native-elements";
+import HFBHeader from "../components/HFBHeader";
 import CustomerContext from "../context/customerContext";
-
 
 export default function HomeScreen({ navigation }) {
     const { salesPerson, setSalesPerson } = useContext(CustomerContext);
@@ -17,24 +17,7 @@ export default function HomeScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Header
-                leftComponent={{
-                    icon: "menu",
-                    color: "#fff",
-                    onPress: () => navigation.openDrawer(),
-                }}
-                centerComponent={{
-                    text: "Home Forever Baths Mobile",
-                    style: { color: "#fff", fontSize: 18 },
-                }}
-                rightComponent={{
-                    icon: "home",
-                    color: "#fff",
-                    onPress: () => navigation.navigate("Home"),
-                }}
-                backgroundColor="black"
-                statusBarProps={{ barStyle: "light-content" }}
-            />
+            <HFBHeader />
             <Text>Details</Text>
 
             <Button
