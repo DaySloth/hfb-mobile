@@ -172,10 +172,10 @@ export default function HomeScreen({ navigation }) {
                     "Please indicate if basement is finished or not"
                 );
             } else {
-                navigation.navigate("Details");
+                navigation.navigate("Measurements");
             }
         } else {
-            navigation.navigate("Details");
+            navigation.navigate("Measurements");
         }
     }
 
@@ -232,6 +232,7 @@ export default function HomeScreen({ navigation }) {
                                         setProjectType(value);
                                     }}
                                     style={{ ...styles }}
+                                    value={projectType}
                                 />
                             </View>
                         </View>
@@ -254,6 +255,7 @@ export default function HomeScreen({ navigation }) {
                                         setInstallStory(value);
                                     }}
                                     style={{ ...styles }}
+                                    value={installStory}
                                 />
                             </View>
                         </View>
@@ -276,6 +278,7 @@ export default function HomeScreen({ navigation }) {
                                         setTypeOfHome(value);
                                     }}
                                     style={{ ...styles }}
+                                    value={typeOfHome}
                                 />
                             </View>
                         </View>
@@ -291,9 +294,10 @@ export default function HomeScreen({ navigation }) {
                                 <TextInput
                                     style={styles.textInput}
                                     clearButtonMode="while-editing"
-                                    onTextInput={(text) => {
+                                    onChangeText={(text) => {
                                         setWorkspaceLocation(text);
                                     }}
+                                    value={workspaceLocation}
                                 />
                             </View>
                         </View>
@@ -309,9 +313,10 @@ export default function HomeScreen({ navigation }) {
                                 <TextInput
                                     style={styles.textInput}
                                     clearButtonMode="while-editing"
-                                    onTextInput={(text) => {
+                                    onChangeText={(text) => {
                                         setBathroomLocation(text);
                                     }}
+                                    value={bathroomLocation}
                                 />
                             </View>
                         </View>
@@ -337,6 +342,7 @@ export default function HomeScreen({ navigation }) {
                                         setOnlyBathroom(value);
                                     }}
                                     style={{ ...styles }}
+                                    value={onlyBathroom}
                                 />
                             </View>
                         </View>
@@ -370,6 +376,7 @@ export default function HomeScreen({ navigation }) {
                                         setWaterShutOff(value);
                                     }}
                                     style={{ ...styles }}
+                                    value={waterShutOff}
                                 />
                             </View>
                         </View>
@@ -395,6 +402,7 @@ export default function HomeScreen({ navigation }) {
                                         setHasBasement(value);
                                     }}
                                     style={{ ...styles }}
+                                    value={hasBasement}
                                 />
                             </View>
                         </View>
@@ -414,13 +422,20 @@ export default function HomeScreen({ navigation }) {
                                             value: null,
                                         }}
                                         items={[
-                                            { label: "Yes", value: "Yes" },
-                                            { label: "No", value: "No" },
+                                            {
+                                                label: "Finished",
+                                                value: "Finished",
+                                            },
+                                            {
+                                                label: "Unfinished",
+                                                value: "Unfinished",
+                                            },
                                         ]}
                                         onValueChange={(value) => {
                                             setBasementCondition(value);
                                         }}
                                         style={{ ...styles }}
+                                        value={basementCondition}
                                     />
                                 </View>
                             </View>
@@ -447,6 +462,7 @@ export default function HomeScreen({ navigation }) {
                                         setIsPermitRequired(value);
                                     }}
                                     style={{ ...styles }}
+                                    value={isPermitRequired}
                                 />
                             </View>
                         </View>
@@ -514,9 +530,10 @@ export default function HomeScreen({ navigation }) {
                                 }}
                                 multiline={true}
                                 placeholder="HOA details..."
-                                onTextInput={(text) => {
+                                onChangeText={(text) => {
                                     setHoaDetails(text);
                                 }}
+                                value={hoaDetails}
                             />
                         </View>
                     )}
