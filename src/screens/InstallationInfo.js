@@ -443,8 +443,18 @@ export default function HomeScreen({ navigation }) {
                     value: null,
                   }}
                   items={[
-                    { label: "Yes", value: "Yes" },
-                    { label: "No", value: "No" },
+                    {
+                      label: "Required (Obtained by HFB)",
+                      value: "Required (Obtained by HFB)",
+                    },
+                    {
+                      label: "Required (Obtained by home owner)",
+                      value: "Required (Obtained by home owner)",
+                    },
+                    {
+                      label: "Not Required by home owner",
+                      value: "Not Required by home owner",
+                    },
                   ]}
                   onValueChange={(value) => {
                     setIsPermitRequired(value);

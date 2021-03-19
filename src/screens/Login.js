@@ -7,6 +7,7 @@ import {
   Alert,
   KeyboardAvoidingView,
   ScrollView,
+  Platform,
 } from "react-native";
 import { Button, Input, Image, Header } from "react-native-elements";
 import { db } from "../../config/firebase.config.js";
@@ -128,7 +129,13 @@ export default function LoginScreen({ navigation }) {
   const [tempError, setTempError] = useState("");
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={
+        Platform.isPad
+          ? { ...styles.container, marginTop: 200, width: "60%" }
+          : { ...styles.container }
+      }
+    >
       <KeyboardAvoidingView
         style={{
           flex: 1,
@@ -149,7 +156,7 @@ export default function LoginScreen({ navigation }) {
             resizeMode="contain"
           />
 
-          <View>
+          <View style={Platform.isPad && { marginTop: 50 }}>
             <Input
               label="Username"
               value={username}
@@ -241,5 +248,7 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "70%",
+    alignSelf: "center",
   },
 });

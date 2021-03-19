@@ -1,6 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Image, Header, Overlay, ListItem } from "react-native-elements";
-import { StyleSheet, Text, View, Dimensions, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Platform,
+  ScrollView,
+} from "react-native";
 import Logo from "../../assets/Kohler-hfb-divider.png";
 import InstallContext from "../context/installContext";
 
@@ -72,138 +79,142 @@ export default function HFBHeader({ navigation }) {
           >
             Current Install Details
           </Text>
-          {projectType !== "" && projectType !== null && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Project Type: </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{projectType}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {installStory !== "" && installStory !== null && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Install story: </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{installStory}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {typeOfHome !== "" && typeOfHome !== null && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Home Type: </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{typeOfHome}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {workspaceLocation !== "" && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Workspace Location: </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{workspaceLocation}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {bathroomLocation !== "" && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Bathroom Location: </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{bathroomLocation}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {onlyBathroom !== "" && onlyBathroom !== null && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Is this their only bathroom? </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{onlyBathroom}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {waterShutOff !== "" && waterShutOff !== null && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Water shut off: </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{waterShutOff}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {typeof hasBasement === "boolean" && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Home has basement? </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{hasBasement ? "Yes" : "No"}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {basementCondition !== "" && basementCondition !== null && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Basement condition? </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{basementCondition}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {isPermitRequired !== "" && isPermitRequired !== null && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>Is a permit required? </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{isPermitRequired}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
-          {hoa !== "" && hoa !== undefined && (
-            <ListItem bottomDivider topDivider>
-              <ListItem.Content style={styles.insideRow}>
-                <View style={styles.left}>
-                  <Text>HOA? </Text>
-                </View>
-                <View style={styles.right}>
-                  <Text>{hoa === true ? "Yes" : "No"}</Text>
-                </View>
-              </ListItem.Content>
-            </ListItem>
-          )}
+          <View style={{ height: 1000 }}>
+            <ScrollView>
+              {projectType !== "" && projectType !== null && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Project Type: </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{projectType}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {installStory !== "" && installStory !== null && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Install story: </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{installStory}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {typeOfHome !== "" && typeOfHome !== null && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Home Type: </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{typeOfHome}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {workspaceLocation !== "" && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Workspace Location: </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{workspaceLocation}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {bathroomLocation !== "" && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Bathroom Location: </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{bathroomLocation}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {onlyBathroom !== "" && onlyBathroom !== null && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Is this the customers only bathroom? </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{onlyBathroom}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {waterShutOff !== "" && waterShutOff !== null && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Water shut off: </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{waterShutOff}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {typeof hasBasement === "boolean" && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Home has basement? </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{hasBasement ? "Yes" : "No"}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {basementCondition !== "" && basementCondition !== null && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Basement condition? </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{basementCondition}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {isPermitRequired !== "" && isPermitRequired !== null && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>Is a permit required? </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{isPermitRequired}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+              {hoa !== "" && hoa !== undefined && (
+                <ListItem bottomDivider topDivider>
+                  <ListItem.Content style={styles.insideRow}>
+                    <View style={styles.left}>
+                      <Text>HOA? </Text>
+                    </View>
+                    <View style={styles.right}>
+                      <Text>{hoa === true ? "Yes" : "No"}</Text>
+                    </View>
+                  </ListItem.Content>
+                </ListItem>
+              )}
+            </ScrollView>
+          </View>
         </View>
       </Overlay>
     </>
