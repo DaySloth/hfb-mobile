@@ -40,19 +40,19 @@ export default function LoginScreen({ navigation }) {
           }
         } else {
           if (password === Base64.decode(user.password)) {
-            // try {
-            //   await AsyncStorage.setItem(
-            //     "hfbUserData",
-            //     JSON.stringify({
-            //       first_name: user.first_name,
-            //       last_name: user.last_name,
-            //       email: user.email,
-            //       last_login: Date.now(),
-            //     })
-            //   );
-            // } catch (error) {
-            //   console.log("error")
-            // }
+            try {
+              await AsyncStorage.setItem(
+                "hfbUserData",
+                JSON.stringify({
+                  first_name: user.first_name,
+                  last_name: user.last_name,
+                  email: user.email,
+                  last_login: Date.now(),
+                })
+              );
+            } catch (error) {
+              console.log("error");
+            }
 
             setSalesPerson({
               first_name: user.first_name,

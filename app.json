@@ -2,8 +2,8 @@
   "expo": {
     "name": "HFB-Mobile",
     "slug": "HFB-Mobile",
-    "privacy" : "unlisted",
-    "version": "1.0.2",
+    "privacy": "unlisted",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/HFB-icon-60x60.png",
     "splash": {
