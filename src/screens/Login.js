@@ -32,7 +32,7 @@ export default function LoginScreen({ navigation }) {
       user = user.val();
       if (user) {
         if (user.tempPassword) {
-          if (password === user.password) {
+          if (password === Base64.decode(user.password)) {
             Alert.alert("Please update your password");
             setIsTempPass(true);
           } else {

@@ -3,7 +3,7 @@
     "name": "HFB-Mobile",
     "slug": "HFB-Mobile",
     "privacy": "unlisted",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/HFB-icon-60x60.png",
     "splash": {

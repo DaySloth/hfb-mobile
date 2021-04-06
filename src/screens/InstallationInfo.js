@@ -391,7 +391,7 @@ export default function HomeScreen({ navigation }) {
               </View>
             </View>
           </View>
-          {hasBasement && (
+          {hasBasement === true && (
             <View style={Platform.isPad ? styles.tabletRow : styles.row}>
               <View
                 style={
@@ -508,7 +508,7 @@ export default function HomeScreen({ navigation }) {
               </View>
             </View>
           </View>
-          {hoa && (
+          {hoa === true && (
             <View
               style={{
                 width: "90%",
