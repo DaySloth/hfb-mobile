@@ -128,7 +128,7 @@ export default function HomeScreen({ navigation }) {
               } else if (!height) {
                 Alert.alert("Form Incomplete", "Please give a height");
               } else {
-                Alert.alert("Complete");
+                navigation.navigate("Parts")
               }
             }}
             style={
